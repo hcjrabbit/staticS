@@ -1,0 +1,23 @@
+{
+    "main": "app/v/main.html",
+    "name": "staticS",
+    "description": "static server",
+    "version": "1.0.0",
+    "keywords": [ "static","server", "node-webkit", "html5" ],
+    "maintainers":{
+        "name" : "xiacheng",
+        "email" : "437851081@qq.com",
+        "web" : "www.hcjlucky.com"
+    },
+    "window": {
+        "width": 700,
+        "height": 400,
+        "frame": false,
+        "debug": false,
+        "icon": "app/v/img/staticS.png",
+        "toolbar": false,
+        "resizable": false,
+        "position": "center",
+        "show": true
+    }
+}

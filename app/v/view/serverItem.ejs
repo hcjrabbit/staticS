@@ -1,0 +1,6 @@
+<% for(var i=0; i< serversData.lists.length; i++) { %>
+<li data-index="<%= i %>" <% if(serversData.currentIndex == i){ %> class="active" <% } %>>
+    <%= serversData.lists[i].name %>
+    <i class="arrow"></i>
+</li>
+<% } %>

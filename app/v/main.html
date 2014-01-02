@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>staticS</title>
+    <base target="_self">
+    <meta charset="utf-8"/>
+    <link href="css/main.css" type="text/css" rel="stylesheet" charset="utf-8"/>
+    <link href="css/jquery-ui.css" type="text/css" rel="stylesheet" charset="utf-8"/>
+    <link href="css/jquery-ui-1.10.3.custom.min.css" type="text/css" rel="stylesheet" charset="utf-8"/>
+</head>
+<body>
+    <div id="window">
+        <!-- hd -->
+        <header id="hd">
+            <div class="dragbar">
+                <h1>static<span>S</span></h1>
+                <p class="app-desc">just a static server</p>
+            </div>
+            <ul class="nav">
+                <span class="help simpletooltip" id="help" title="帮助"></span>
+                <span class="minimize simpletooltip" id="minimize" title="最小化"></span>
+                <span class="close simpletooltip" id="closeWin" title="关闭"></span>
+            </ul>
+            <span title="" id="winTip"></span>
+        </header>
+        <!-- hd end -->
+        <!-- bd -->
+        <section id="bd">
+            <div id="sidebar">
+                <ul id="menus">
+                    <li id="addServer"  title="新建"></li>
+                    <li id="delServer"  title="删除"></li>
+                </ul>
+                <div id="projects">
+                    <ul id="listsPanel">
+                    </ul>
+                </div>
+            </div>
+
+            <section id="main">
+                <div class="input-wrap">
+                    <label>域名&nbsp;&nbsp;<span>*</span></label>
+                    <input type="text" class="input-text"  name="hostName" placeholder="hostname" />
+                </div>
+                <div class="input-wrap">
+                    <label>URL项目匹配地址&nbsp;&nbsp;<span>*</span></label>
+                    <input type="text" class="input-text" name="projectPath" placeholder="项目匹配地址" />
+                </div>
+                <div class="input-wrap">
+                    <label>开发环境目录&nbsp;&nbsp;<span>*</span></label>
+                    <input type="text" class="input-text" id="path1" name="develop"  placeholder="未压缩文件路径"   />
+                    <button class="fileBtn"></button>
+                    <input type="file" id="file1" class="fileBtnInput" nwdirectory style="display: none;"/>
+                </div>
+                <div class="input-wrap">
+                    <label>生成环境目录</label>
+                    <input type="text" class="input-text" id="path2"  name="product" placeholder="压缩文件路径"  />
+                    <button class="fileBtn"></button>
+                    <input type="file" id="file2" class="fileBtnInput" nwdirectory style="display: none;"/>
+                </div>
+                <div class="input-wrap">
+                    <label>备用ip地址</label>
+                    <input type="text" class="input-text" name="ip" placeholder="线上请求ip" />
+                </div>
+                <div class="control-bar">
+                    <div class="hr"></div>
+                    <span id="fileStat"></span>
+                    <button class="btn_green " id="requestRec">请求记录</button>
+                    <button class="btn_green" id="useInfo">使用手册</button>
+                    <button class="btn_blue " id="start">启动</button>
+                    <button class="btn_red btn_disable" id="stop">停止</button>
+                </div>
+            </section>
+            <div class="extend">
+                <div class="inner" id="dataDetail">
+                    <h3 class="title" >配置项</h3>
+
+                    <h4 class="desc" id="serverName"></h4>
+                    <div class="option_args">
+                        <label>
+                            <input type="checkbox" checked  name="isDebug" id="debugCheck" />
+                            启用debug模式
+                        </label>
+                        <label>
+                            支持文件格式
+                            <input type="text" id="supportedFile"  name="supportedFile" >
+                        </label>
+                        <label>
+                            输出文件编码
+                            <input type="text" id="outCharset"  name="charset" >
+                        </label>
+                        <label>
+                            combo识别符
+                            <input type="text" id="comboServlet"  name="servlet" >
+                        </label>
+                        <label>
+                            combo分隔符
+                            <input type="text" id="comboSeperator"  name="seperator" >
+                        </label>
+
+                        <button class="btn_blue" id="restart">重新启动</button>
+                        <p id="onlineNumWrap">在线人数:<span id="onlineNum">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- bd  end-->
+    </div>
+    <div class="status" id="status">
+        <ul class="desc">
+            <li><span class="green"></span>本地资源</li>
+            <li><span class="gray"></span>线上资源</li>
+            <li><span class="blue"></span>缓存记录</li>
+            <li><span class="red"></span>资源获取不到</li>
+            <li><span class="qita"></span>其他</li>
+            <li><button id="cleanRecord" class="btn_red">清空记录</button> </li>
+        </ul>
+        <div class="detail"></div>
+    </div>
+    <div style="display: none;" id="helpDialog" title="简介">
+        <p>描述: 多环境晶体服务器集成COMBO服务 </p>
+        <p>版本号: V1.0.0</p>
+        <p>旺旺ID: 夏城</p>
+        <p><button id="checkUpdate">检查更新</button></p>
+    </div>
+    <div style="display: none;" id="updateDialog" title="有新版本可以更新，你看要不要更新！！">
+        <p>
+            <br/>
+        </p>
+        <p>
+            <button id="updateBtn">立即更新</button>
+            <button id="updateLaterBtn">以后更新</button>
+            <button id="updateCancelBtn">取消</button>
+        </p>
+    </div>
+    <div style="display: none;" id="caseDialog" class="caseDialog">
+        <div class="case">
+            <p style="font-weight: bold;color: #3b9cef;">例如:</p>
+            <p><label>请求地址:</label>http://g.tbcdn.cn/tm/wuliu-spp-sys/1.0.1/css/common.css</p>
+            <p class="hr"></p>
+            <p><label>域名:</label>g.tbcdn.cn</p>
+            <p class="gray">请求地址的域名，无需http://</p>
+            <p><label>匹配地址:</label>tm/wuliu-spp-sys/1.0.1</p>
+            <p class="gray">为了适应所有请求地址，设定匹配路径来区分同一域名下的不同项目地址</p>
+            <p><label>开发环境目录:</label><span style="color: #3b9cef;">Mac:</span>/Users/hcj/Projects/workstation/spp/spp_sys/src</p>
+            <p><label> </label><span style="color: #3b9cef;">Windows:</span>\\Users\\hcj\\Projects\\workstation\\spp\\spp_sys\\src</p>
+            <p class="gray">本地未压缩文件存放的目录，如果debug模式启用，则会请求该目录下的文件</p>
+            <p><label>生成环境目录:</label><span style="color: #3b9cef;">Mac:</span>/Users/hcj/Projects/workstation/spp/spp_sys/build</p>
+            <p><label></label><span style="color: #3b9cef;">Windows:</span>\\Users\\hcj\\Projects\\workstation\\spp\\spp_sys\\build</p>
+            <p class="gray">本地压缩文件存放的目录，如果debug模式未启用，则会请求该目录下的文件</p>
+            <p><label>备用ip地址:</label>10.235.136.37 </p>
+            <p class="gray">如果本地文件不存在则会请求10.235.136.37服务器上的文件，若不设定则会提示文件不存在</p>
+            <p style="font-weight: bold;color: #3b9cef;margin-top: 10px;">多环境启动:</p>
+            <p><label>启动:</label>你想启动哪一个服务，就点启动哪一个服务，只要域名与项目路径</p>
+            <p><label></label>其中一个不同就不会有任何干扰，任务栏还有一键全启</p>
+            <p><label>停止:</label>同样，你可以单独停止而不会停止其他,你也可以一键全部停止</p>
+            <p style="font-weight: bold;color: #3b9cef;margin-top: 10px;">温馨提示:</p>
+            <p><label></label>只要你域名和项目路径其中一个不同，那么就可以同时启动两个不同的服务！！</p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/ejs.min.js"></script>
+    <script type="text/javascript" src="js/jQuery-ui.js"></script>
+    <script type="text/javascript" src="../c/main.js"></script>
+</body>
+</html>
