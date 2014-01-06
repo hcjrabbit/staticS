@@ -100,6 +100,12 @@ var S = {
         });
         $('.fileBtnInput').bind('change', function () {
             if ($(this)[0].id == 'file1') {
+                if(this.value != '' ){
+                    if(Sys == 'Mac' && this.value.substr(this.value.length - 1,1) != '/')
+                        this.value = this.value + '/';
+                    else
+                        this.value = this.value + '\\';
+                }
                 $('#path1').val(this.value);
                 S.changeAtt('develop', this.value);
             }

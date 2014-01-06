@@ -19,8 +19,10 @@ http.createServer(function (req, res) {
         pathname = url.parse(req.url).pathname,
         isMatchSys = false,
         matchItem;
-
     servers.forEach(function (item) {
+        if(hostname == item.hostName && item.ip != ''){
+            commonHostsIp[hostname] = item.ip;
+        }
         if (hostname == item.hostName && pathname.indexOf(item.projectPath) > -1) {
             matchItem = item;
             isMatchSys = true;
@@ -28,7 +30,7 @@ http.createServer(function (req, res) {
     });
     if (!isMatchSys) {
         http.get({
-            hostname: commonHostsIp[hostname], port: 80, path: pathname,headers:{"host":hostname}},function (res2) {
+            hostname: commonHostsIp[hostname], port: 80, path: req.url,headers:{"host":hostname}},function (res2) {
             var data = '';
 
             if(res2.statusCode !== 200){

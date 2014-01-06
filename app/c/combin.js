@@ -355,6 +355,7 @@ function readFromLocal(fullPath) {
 //            absPath = path.normalize(path.join(param.prjDir, dir, revPath));
 //        }
         absPath = path.normalize(path.join(dir, revPath));
+
         if (fs.existsSync(absPath)) {
             var buff = fs.readFileSync(absPath);
             if (isBinFile(absPath)) {

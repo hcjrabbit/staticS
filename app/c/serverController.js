@@ -24,8 +24,10 @@ var Server = {
 
 
             servers.forEach(function (item) {
+                if(hostname == item.hostName && item.ip != ''){
+                    commonHostsIp[hostname] = item.ip;
+                }
                 if (hostname == item.hostName && pathname.indexOf(item.projectPath) > -1) {
-                    console.log('err&'+pathname)
                     matchItem = item;
                     isMatchSys = true;
                 }
@@ -102,7 +104,7 @@ var Server = {
             global.childProcess.on('exit',function(err,stdin,stdout){
                 if (err){
                     if(err == '8'){
-                        callback('','已有node服务启动！请先关闭。。');
+                        callback('','80端口被占用！请先关闭。。');
                     }else if(err == '1'){
                         sysPassword = '';
                         global.localStorage.sysPassword = sysPassword;
